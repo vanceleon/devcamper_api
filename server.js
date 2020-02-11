@@ -10,6 +10,13 @@ dotenv.config({ path: './config/config.env' });
 
 const app = express();
 
+const logger = (req, res, next) => {
+  req.hello = 'Hello World';
+  console.log('Middleware ran');
+  next();
+}
+
+app.use(logger);
 
 // Mount Routers
 app.use('/api/v1/bootcamps', bootcamps);
@@ -22,9 +29,3 @@ app.listen(
     `======Server running in ${process.env.NODE_ENV} mode on ${PORT}=====`
   )
 );
-
-// app.get('/api/v1/testing', (req, res) => {
-//   // res.send('<h1>Hello from express</h1>')
-// // res.send({"name": "Vance"})
-// res.status(200).json({succes:true, msg: 'Show all bootcamps'})
-// })
