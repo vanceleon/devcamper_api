@@ -5,6 +5,10 @@ router.get('/', (req, res) => {
   res.status(200).json({ succes: true, msg: 'Show all bootcamps' });
 });
 
+router.get('/:id', (req, res) => {
+  res.status(200).json({ succes: true, msg: 'Show specific bootcamp' });
+});
+
 router.post('/', (req, res) => {
   res.status(200).json({ succes: true, msg: 'Create new bootcamp message' });
 });
