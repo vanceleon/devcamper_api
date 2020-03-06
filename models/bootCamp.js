@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+// const slugify = require('')
 
 const BootcampSchema = new mongoose.Schema({
   name: {
@@ -37,11 +38,9 @@ const BootcampSchema = new mongoose.Schema({
     type: {
       type: String,
       enum: ['Point'],
-      required: true
     },
     coordinates: {
       type: [Number],
-      required: tru,
       index: '2dsphere'
     },
     formattedAddress: String,
