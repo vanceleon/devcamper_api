@@ -11,7 +11,7 @@ exports.getBootcamps = async (req, res, next) => {
       .status(200)
       .json({ success: true, count: bootcamps.length, data: bootcamps });
   } catch (error) {
-    res.status(400).json({ success: false });
+    next(error);
   }
 };
 
@@ -25,14 +25,11 @@ exports.getBootcamp = async (req, res, next) => {
       return new ErrorResponse(
         `Bootcamp not found with id of ${req.params.id}`,
         404
-      );//this is for properly formatted ids but not in the db
+      ); //this is for properly formatted ids but not in the db
     }
     res.status(200).json({ success: true, data: bootcamp });
   } catch (error) {
-    next(
-      new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
-    ); //id is not valid
-    // res.status(400).json({ success: false });
+    next(error); //id is not valid
   }
 };
 
@@ -47,8 +44,8 @@ exports.createBootcamp = async (req, res, next) => {
       success: true,
       data: bootcamp
     });
-  } catch (err) {
-    res.status(400).json({ success: false });
+  } catch (error) {
+    next(error);
   }
   // Code below will show the data inserted into the db and the request in console
   // console.log(req.body)
@@ -66,11 +63,14 @@ exports.updateBootcamp = async (req, res, next) => {
     });
 
     if (!bootcamp) {
-      return res.status(400).json({ success: false });
+      return new ErrorResponse(
+        `Bootcamp not found with id of ${req.params.id}`,
+        404
+      ); //this is for properly formatted ids but not in the db
     }
     res.status(200).json({ success: true, data: bootcamp });
   } catch (error) {
-    res.status(400).json({ success: false });
+    next(error);
   }
 };
 
@@ -81,10 +81,13 @@ exports.deleteBootcamp = async (req, res, next) => {
   try {
     const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id);
     if (!bootcamp) {
-      return res.status(400).json({ success: false });
+      return new ErrorResponse(
+        `Bootcamp not found with id of ${req.params.id}`,
+        404
+      ); //this is for properly formatted ids but not in the db
     }
     res.status(200).json({ success: true, data: `Deleted ${bootcamp}` });
   } catch (error) {
-    res.status(400).json({ success: false });
+    next(error);
   }
 };
