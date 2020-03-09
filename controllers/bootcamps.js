@@ -8,7 +8,7 @@ exports.getBootcamps = async (req, res, next) => {
     const bootcamps = await Bootcamp.find();
     res.status(200).json({ success: true, data: bootcamps });
   } catch (error) {
-    res.status(400).json({ succes: false });
+    res.status(400).json({ success: false });
   }
 };
 
@@ -16,7 +16,12 @@ exports.getBootcamps = async (req, res, next) => {
 // @route   Get /api/v1/bootcamps/:id
 // @access    Public
 exports.getBootcamp = async (req, res, next) => {
-  res.status(200).json({ succes: true, msg: 'Show specific bootcamp' });
+  try {
+    const bootcamp = await Bootcamp.findById(req.params.id);
+    res.status(200).json({ success: true, data: bootcamp });
+  } catch (error) {
+    res.status(400).json({ success: false });
+  }
 };
 
 // @desc create new bootcamp
@@ -31,7 +36,7 @@ exports.createBootcamp = async (req, res, next) => {
       data: bootcamp
     });
   } catch (err) {
-    res.status(400).json({ succes: false });
+    res.status(400).json({ success: false });
   }
   // Code below will show the data inserted into the db and the request in console
   // console.log(req.body)
@@ -42,7 +47,7 @@ exports.createBootcamp = async (req, res, next) => {
 // @route   PUT /api/v1/bootcamps/:id
 // @access    Private
 exports.updateBootcamp = (req, res, next) => {
-  res.status(200).json({ succes: true, msg: `Get Bootcamp ${req.params.id}` });
+  res.status(200).json({ success: true, msg: `Get Bootcamp ${req.params.id}` });
 };
 
 // @desc DELETE bootcamp
@@ -51,5 +56,5 @@ exports.updateBootcamp = (req, res, next) => {
 exports.deleteBootcamp = (req, res, next) => {
   res
     .status(200)
-    .json({ succes: true, msg: `Delete Bootcamp ${req.params.id}` });
+    .json({ success: true, msg: `Delete Bootcamp ${req.params.id}` });
 };
