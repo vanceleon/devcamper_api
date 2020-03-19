@@ -106,20 +106,24 @@ BootcampSchema.pre('save', function(next) {
 })
 
 // Geocode & create location field
-BootcampSchema.pre('save', async function(next) {
-  const loc = await geocoder.geocode(this.address);
-  this.location = {
-    type: 'Point',
-    // research loc[0]
-    coordinates: [loc[0].longitude, loc[0].latitude],
-    formattedAddress: loc[0].formattedAddress,
-    streetName: loc[0].streetName, 
-    city: loc[0].city, 
-    state: loc[0].stateCode, 
-    zipcode: loc[0].zipcode, 
-    country: loc[0].countryCode , 
-  }
-  next();
-})
+// I know this works and will take out for dev to prevent charging
+// BootcampSchema.pre('save', async function(next) {
+//   const loc = await geocoder.geocode(this.address);
+//   this.location = {
+//     type: 'Point',
+//     // research loc[0]
+//     coordinates: [loc[0].longitude, loc[0].latitude],
+//     formattedAddress: loc[0].formattedAddress,
+//     streetName: loc[0].streetName, 
+//     city: loc[0].city, 
+//     state: loc[0].stateCode, 
+//     zipcode: loc[0].zipcode, 
+//     country: loc[0].countryCode , 
+//   }
+
+//   // Don't save address in DB
+//   this.address = undefined;
+//   next();
+// })
 
 module.exports = mongoose.model('Bootcamp',BootcampSchema);
