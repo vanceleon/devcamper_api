@@ -23,6 +23,7 @@ const errorHandler = (error, req, res, next) => {
 
   //Mongoose Validation error
   if (error.name === 'ValidationError') {
+    // dynamically create alerts for the frontend to notify the user
     const message = Object.values(error.errorObj).map(val => val.message);
     errorObj = new ErrorResponse(message, 400);
   }

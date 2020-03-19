@@ -1,4 +1,5 @@
 const ErrorResponse = require('../utils/errorResponse');
+const asyncHandler = require('../middleware/async');
 const Bootcamp = require('../models/bootcamp');
 
 // @desc Get all bootcamps
