@@ -36,8 +36,6 @@ exports.createBootcamp = asyncHandler(async (req, res, next) => {
     data: bootcamp
   });
   // Code below will show the data inserted into the db and the request in console
-  // console.log(req.body)
-  // res.status(200).json({ succes: true, msg: 'Create new bootcamp message' });
 });
 
 // @desc Update new bootcamp
