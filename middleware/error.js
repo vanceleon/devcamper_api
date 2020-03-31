@@ -34,3 +34,9 @@ const errorHandler = (error, req, res, next) => {
   });
 };
 module.exports = errorHandler;
+
+function enterForLoop (i) {
+  while (i > 0) {
+    console.log(i);
+  }
+}
